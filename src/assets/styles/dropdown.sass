@@ -1,0 +1,135 @@
+.select__dropdown  
+    display: none
+ 
+
+.select__dropdown-active  
+    display: block;
+    max-height: 300px;
+    overflow: auto;
+    background: hsla(0,0%,100%,.8);
+    z-index: 1000;
+    border-radius: 0 0 5px 5px
+ 
+
+.select__menu,.select__menu-active  
+    position: -webkit-sticky;
+    position: sticky;
+    top: 110px;
+    width: 300px;
+    margin-top: -100px;
+    margin-bottom: 100px;
+    left: 50%;
+    height: 0;
+    z-index: 100;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%)
+ 
+
+.menu-item .select__menu-active .selected,.menu-item .select__menu .selected  
+    width: auto;
+    min-width: 150px;
+    padding: 0 16px
+ 
+
+.menu-item .select__dropdown-item,.menu-item .select__menu-active  
+    width: auto;
+    min-width: 150px
+ 
+
+.select__menu-easy  
+    position: relative;
+    left: 0;
+    top: 0;
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+    margin-bottom: 0;
+    margin-top: 0;
+    width: auto!important
+ 
+
+.selected  
+    background: hsla(0,0%,100%,.8);
+    width: 300px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    border-radius: 10px;
+    cursor: pointer;
+    color: #808b67;
+    font-family: Istok Web;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 24px;
+    text-align: center;
+    z-index: 100
+ 
+
+.select__arrow  
+    position: absolute;
+    right: 17px;
+    height: 9px;
+    transition: .2s
+ 
+
+.selected-active .select__arrow  
+    -webkit-transform: rotateX(180deg);
+    transform: rotateX(180deg)
+ 
+
+.selected-active  
+    background: #fff;
+    width: 300px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: -6px;
+    position: relative
+ 
+
+.selected-active:after  
+    content: "";
+    left: 0;
+    top: 0;
+    position: absolute;
+    background: hsla(0,0%,100%,.8);
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    border-radius: 10px 10px 0 0
+ 
+
+.select__dropdown-item  
+    width: 300px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    cursor: pointer;
+    color: #808b67;
+    font-family: Istok Web;
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: -.52px;
+    line-height: 24px;
+    text-align: center
+ 
+
+@media screen and (max-width: 1280px)  
+    .select__menu-easy  
+        margin: 17pt 0;
+        z-index: 10;
+        -webkit-transform: translateX(0)!important;
+        transform: translateX(0)!important
+     
+ 
+
+@media screen and (max-width: 600px)  
+    .select__menu,.select__menu-active  
+        -webkit-transform: translateX(calc(-50vw + 150px));
+        transform: translateX(calc(-50vw + 150px))
+     
+ 

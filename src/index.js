@@ -1,8 +1,34 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+import "./assets/styles/index.sass";
+import {Provider} from 'react-redux';
+import configureStore from './store/configureStore';
 import * as serviceWorker from './serviceWorker';
+
+//import ItemList from './components/ItemList';
+import Header from './components/Header';
+import MainMenu from './components/MainMenu';
+import MainSlider from './components/MainSlider';
+import InteractiveBlock from './components/InteractiveBlock';
+import Footer from './components/Footer';
+
+const store = configureStore();
+
+function App() {
+  return (
+    <Provider store={store}>
+      {/*<ItemList/>*/}
+      <Header/>
+      <MainMenu/>
+      <MainSlider/>
+      <InteractiveBlock/>
+      <Footer/>
+    </Provider>
+  );
+}
+
+export default App;
+
 
 ReactDOM.render(<App />, document.getElementById('root'));
 
