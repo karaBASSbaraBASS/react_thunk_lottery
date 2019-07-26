@@ -1,0 +1,105 @@
+.lottery
+    display: flex;
+    justify-content: center;
+    .container
+        display: flex;
+        flex-direction: column;
+    &__heading
+        width: 100%;
+        h1,h2,h3
+            text-align: center;
+    &__form
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 100%;
+        min-height: 200px;
+        margin-bottom: 30px;
+    &__wrapper
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        min-height: 200px;
+        border: 5px solid #537acc;
+        border-radius: 5px;
+        margin-bottom: 20px;
+    &__card
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        width: calc(20% - 10px);
+        margin: 5px auto;
+        position: relative;
+    &__item
+        width: calc(25% - 10px);
+        margin: 5px auto;
+        border: 2px solid #dedeef;
+        border-radius: 5px;
+        position: relative;
+        input
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            margin: 0;
+    &__cardNumber
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 80px;
+        font-weight: 900;
+        color: #3d5dd68c;
+        z-index: -1;
+    &__cellNumber
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 100%;
+        text-align: center;
+        z-index: -1;
+    &__sendBtn
+        display: block;
+        padding: 20px 10px;
+        max-width: 200px;
+        border-radius: 5px;
+        box-shadow: none;
+        border: 5px solid $primaryColor;
+        margin: 0 auto;
+        background-color: #ffffff;
+        color: $primaryColor;
+        font-size: 22px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background-color 0.1s linear;
+        &:hover
+            background-color: $primaryColor;
+            color: #ffffff;
+
+input[type=checkbox]:checked + span
+  background-color: #acff00;
+
+// @keyframes bounce   
+//     from, 20%, 53%, 80%, to   
+//         animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+//         transform: translate3d(0,0,0);
+   
+
+//   40%, 43%   
+//     animation-timing-function: cubic-bezier(0.755, 0.050, 0.855, 0.060);
+//     transform: translate3d(0, -30px, 0);
+   
+
+//   70%   
+//     animation-timing-function: cubic-bezier(0.755, 0.050, 0.855, 0.060);
+//     transform: translate3d(0, -15px, 0);
+   
+
+//   90%   
+//     transform: translate3d(0,-4px,0);
+   
+
+// .bounce   
+//   animation: bounce 0.5s;
+//   transform-origin: center bottom;
+ 

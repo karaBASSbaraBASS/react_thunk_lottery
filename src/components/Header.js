@@ -4,68 +4,39 @@ import logo from '../assets/img/data-random-squares.svg';
 import { connect } from 'react-redux';
 import { sitiesFetchData } from '../actions/items';
 import sitiesList from "../mockData/sityList.json";
-import Dropdown from "../components/dropdown/Dropdown";
-import DropdownItem from "../components/dropdown/DropdownItem";
+import DropdownMenu from "../components/dropdown/DropdownMenu";
 
 
 class Header extends React.Component {
-    constructor() {
-        super();
-
-        this.state = {
-            sityDropdown: [
-                {
-                    type: "normal",
-                    status: false,
-                    name: "",
-                    default_name: "select",
-                    click: "toogle",
-                    active: false
-                }
-            ]
-        };
-    }
-    
+    // get async request with sity names 
     componentDidMount() { 
-        this.props.sitiesData({sitiesList});
+        this.props.fetchSities({sitiesList});
     }
     render() {
+        let {sities} = this.props;
+        let {sitiesList} = this.props.sities;
         return (
             <header className="mainHeader">
                 <div className="container maxWidth">
                     <div className="logo">
                         <Link text="loto zabava" link="#about" img={logo}/>
                     </div>
-                    
                     <ul className="headerNav">
                         <li className="headerNav__item">
-                        {/* <Dropdown
-                            type="normal"
-                            status={this.state.status}
-                            name={this.state.name}
-                            default_name={this.props.sities[0].name}
-                            click={this.handleToggleDropdown}
-                            active={this.props.sities.length > 1}
-                        >
-                            {this.props.sities.length > 1 && this.props.sities.map( (sityItem, index) => {
-                                return (
-                                    <DropdownItem 
-                                        key={index}
-                                        click={() => this.handleSelectMenu(sityItem)}>
-                                            {sityItem.name}
-                                    </DropdownItem>
-                                );
-                            })}
-                        </Dropdown> */}
+                            {
+                                this.props.sities.sitiesList===undefined
+                                ? <span className="loadingStat">loading</span>
+                                : <DropdownMenu sitiesList={sitiesList} sities={sities}/>
+                            }
                         </li>
                         <li className="headerNav__item">
-                            <Link text="register" link="#about"/>
+                            <Link text="register" link="#register"/>
                         </li>
                         <li className="headerNav__item">
-                            <Link text="sign in" link="#about"/>
+                            <Link text="sign in" link="#signIn"/>
                         </li>
                         <li className="headerNav__item">
-                            <Link text="cart" link="#about"/>
+                            <Link text="cart" link="#cart"/>
                         </li>
                     </ul>
                     
@@ -78,12 +49,13 @@ const mapStateToProps = (state) => {
     return {
         items: state.items,
         hasErrored: state.itemsHasErrored,
-        isLoading: state.itemsIsLoading
+        isLoading: state.itemsIsLoading,
+        sities: state.sities
     };
 };
 const mapDispatchToProps = (dispatch) => {
     return {
-        sitiesData: (src) => dispatch(sitiesFetchData(src))
+        fetchSities: (src) => dispatch(sitiesFetchData(src))
     };
 };
 

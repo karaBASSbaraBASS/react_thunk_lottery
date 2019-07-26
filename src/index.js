@@ -5,7 +5,7 @@ import {Provider} from 'react-redux';
 import configureStore from './store/configureStore';
 import * as serviceWorker from './serviceWorker';
 
-//import ItemList from './components/ItemList';
+import ItemList from './components/ItemList';
 import Header from './components/Header';
 import MainMenu from './components/MainMenu';
 import MainSlider from './components/MainSlider';
@@ -17,12 +17,12 @@ const store = configureStore();
 function App() {
   return (
     <Provider store={store}>
-      {/*<ItemList/>*/}
       <Header/>
       <MainMenu/>
       <MainSlider/>
       <InteractiveBlock/>
       <Footer/>
+      {/* <ItemList/> */}
     </Provider>
   );
 }

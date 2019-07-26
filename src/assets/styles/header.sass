@@ -16,18 +16,19 @@
     display: flex;
     flex-direction: row;
     align-items: space-around;
-.headerNav__item a 
-    display: block;
-    background-color: transparent;
-    text-decoration: none;
-    border-radius: 5px;
-    padding: 10px 20px;
-    color: #fff;
-.headerNav__item.active a
-    background-color: #00e7bc;
-.headerNav__item a:hover
-    background-color: #00e7bc;
-    transition: background-color 0.1s linear;
+    &__item 
+        a 
+            display: block;
+            background-color: transparent;
+            text-decoration: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            color: #fff;
+            &:hover
+                background-color: #00e7bc;
+                transition: background-color 0.1s linear;
+        .active a
+            background-color: #00e7bc;
 .logo
     .link-img
         height: auto;

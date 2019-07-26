@@ -15,14 +15,14 @@ export function itemsIsLoading(bool) {
 export function itemsFetchDataSuccess(items) {
     return {
         type: 'ITEMS_FETCH_DATA_SUCCESS',
-        items
+        items: items
     };
 }
 
 export function sitiesFetchDataSuccess(sities) {
     return {
         type: 'SITIES_FETCH_DATA_SUCCESS',
-        sities
+        payload: sities
     };
 }
 export function itemsFetchData(url) {
@@ -40,7 +40,7 @@ export function itemsFetchData(url) {
                 return response;
             })
             .then((response) => response.json())
-            .then((items) => dispatch(itemsFetchDataSuccess(items)))
+            .then((items2) => dispatch(itemsFetchDataSuccess(items2)))
             .catch(() => dispatch(itemsHasErrored(true)));
     };
 }
@@ -48,7 +48,6 @@ export function sitiesFetchData(sities) {
     return (dispatch) => {
         setTimeout(() => {
             dispatch(sitiesFetchDataSuccess(sities))
-            console.log(sities)
         }, 3000);
     };
 }

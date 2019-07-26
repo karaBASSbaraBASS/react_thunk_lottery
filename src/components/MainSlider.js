@@ -23,7 +23,7 @@ class MainSlider extends React.Component {
 					eachSlide: `url(${Slide_4})`
 				}
 			],
-			autoplay: false,
+			autoplay: true,
 			active: 0,
 			max: 0
 		}
@@ -35,7 +35,7 @@ class MainSlider extends React.Component {
 		this.prevOne = this.prevOne.bind(this);
 	}
 	componentDidMount(){
-		this.interval = setInterval(()=> this.intervalBetweenSlides(), 3000)
+		this.interval = setInterval(()=> this.intervalBetweenSlides(), 5000)
 	}
 	componentWillUnmount(){
 		clearInterval(this.interval)

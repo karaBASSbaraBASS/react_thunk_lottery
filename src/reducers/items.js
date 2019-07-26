@@ -25,7 +25,7 @@ export function items(state = [], action) {
 export function sities(state = [], action) {
     switch(action.type) {
         case 'SITIES_FETCH_DATA_SUCCESS':
-            return action.sities;
+            return action.payload;
         default:
             return state;
     }

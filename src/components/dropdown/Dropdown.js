@@ -22,7 +22,7 @@ const Dropdown = ({
         className={status ? 'selected selected-active ' : 'selected'}
         onClick={click}
       >
-        <span>{name ? name.name : default_name}</span>
+        <span>{name ? name : default_name}</span>
 
         {active && <img className='select__arrow' src={Arrow} />}
       </div>

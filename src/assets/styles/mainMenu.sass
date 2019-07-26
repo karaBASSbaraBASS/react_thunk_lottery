@@ -1,0 +1,52 @@
+.mainMenu
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 150px;
+    background-color: #292929;
+
+.mainMenu__Button
+    color: #ffffff;
+    text-align: center;
+
+.col-4
+    margin: 0 10px;
+    width: calc(25% - 20px);
+
+.flip-card
+  background-color: transparent;
+  width: 100%;
+  height: 150px;
+  perspective: 1000px;
+  cursor: pointer;
+
+.flip-card-inner
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+
+.flip-card:hover .flip-card-inner 
+  transform: rotateY(180deg);
+
+.flip-card-front, 
+.flip-card-back 
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+
+.flip-card-front
+  background-color: #0a0a0a;
+  color: #ffffff;
+
+.flip-card-back
+  background-color: dodgerblue;
+  color: white;
+  transform: rotateY(180deg);

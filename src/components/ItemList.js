@@ -31,7 +31,8 @@ const mapStateToProps = (state) => {
     return {
         items: state.items,
         hasErrored: state.itemsHasErrored,
-        isLoading: state.itemsIsLoading
+        isLoading: state.itemsIsLoading,
+        sities: state.sities
     };
 };
 const mapDispatchToProps = (dispatch) => {
