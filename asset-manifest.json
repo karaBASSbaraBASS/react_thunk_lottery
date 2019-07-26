@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/react_thunk_lottery/static/css/main.859f772f.chunk.css",
+    "main.js": "/react_thunk_lottery/static/js/main.b8ce9f58.chunk.js",
+    "main.js.map": "/react_thunk_lottery/static/js/main.b8ce9f58.chunk.js.map",
+    "runtime~main.js": "/react_thunk_lottery/static/js/runtime~main.664de644.js",
+    "runtime~main.js.map": "/react_thunk_lottery/static/js/runtime~main.664de644.js.map",
+    "static/js/2.cd8ebffc.chunk.js": "/react_thunk_lottery/static/js/2.cd8ebffc.chunk.js",
+    "static/js/2.cd8ebffc.chunk.js.map": "/react_thunk_lottery/static/js/2.cd8ebffc.chunk.js.map",
+    "index.html": "/react_thunk_lottery/index.html",
+    "precache-manifest.3d919bbf9a5c48c1778a846dc987755a.js": "/react_thunk_lottery/precache-manifest.3d919bbf9a5c48c1778a846dc987755a.js",
+    "service-worker.js": "/react_thunk_lottery/service-worker.js",
+    "static/css/main.859f772f.chunk.css.map": "/react_thunk_lottery/static/css/main.859f772f.chunk.css.map",
+    "static/media/1.png": "/react_thunk_lottery/static/media/1.b9c89c3c.png",
+    "static/media/2.png": "/react_thunk_lottery/static/media/2.efc821d7.png",
+    "static/media/3.png": "/react_thunk_lottery/static/media/3.2842346a.png",
+    "static/media/4.png": "/react_thunk_lottery/static/media/4.f7dc65d7.png",
+    "static/media/arrow-down-angle.svg": "/react_thunk_lottery/static/media/arrow-down-angle.5429b6f7.svg",
+    "static/media/data-random-squares.svg": "/react_thunk_lottery/static/media/data-random-squares.5279378f.svg",
+    "static/media/facebook-logo.svg": "/react_thunk_lottery/static/media/facebook-logo.6cd898e0.svg",
+    "static/media/instagram.svg": "/react_thunk_lottery/static/media/instagram.652a3a51.svg",
+    "static/media/twitter.svg": "/react_thunk_lottery/static/media/twitter.0fd0f820.svg"
+  }
+}
