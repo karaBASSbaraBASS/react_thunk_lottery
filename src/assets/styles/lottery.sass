@@ -23,6 +23,21 @@
         border: 5px solid #537acc;
         border-radius: 5px;
         margin-bottom: 20px;
+        transition: all 0.5s linear;
+        .errorMessage
+            color: #f98f8ff5;
+            position: absolute;
+            bottom: -55px;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            z-index: -1;
+            transition: opacity 0.5s linear;
+        &.error
+            border: 5px solid #f98f8ff5;
+            .errorMessage
+                opacity: 1;
+
     &__card
         display: flex;
         flex-wrap: wrap;
@@ -30,12 +45,19 @@
         width: calc(20% - 10px);
         margin: 5px auto;
         position: relative;
+        border: 2px solid white;
+        border-radius: 5px;
+        transition: border 0.5s linear;
+        &.error
+            border: 2px solid #f98f8ff5;
+            
     &__item
         width: calc(25% - 10px);
         margin: 5px auto;
         border: 2px solid #dedeef;
         border-radius: 5px;
         position: relative;
+        overflow: hidden;
         input
             opacity: 0;
             width: 100%;
@@ -50,12 +72,14 @@
         font-weight: 900;
         color: #3d5dd68c;
         z-index: -1;
+        border: 2px solid white;
     &__cellNumber
         position: absolute;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
         width: 100%;
+        height: 100%;
         text-align: center;
         z-index: -1;
     &__sendBtn

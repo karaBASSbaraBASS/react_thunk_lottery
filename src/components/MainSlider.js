@@ -43,14 +43,16 @@ class MainSlider extends React.Component {
 	intervalBetweenSlides(){
 		if(this.state.autoplay === true){
 			if(this.state.active === this.state.max - 1) {
-				this.state.active = 0
+				let activeState = this.state.active;
+				activeState = 0;
+				this.setState({ active: activeState })
 			} else {
-				this.state.active++
+				let increment = this.state.active;
+				increment += 1;
+				this.setState({ active: increment })
 			}
 
-			this.setState({
-				active: this.state.active
-			})
+			this.setState({ active: this.state.active })
 		}
 	}
 	toggleAutoplay(){
@@ -115,7 +117,7 @@ class MainSlider extends React.Component {
 					ref="dots"
 					onClick={this.dots.bind(this,index)}
 				>
-					<a>&#9679;</a>
+					<div className="dot">&#9679;</div>
 				</li>
 			))
 	}
@@ -178,11 +180,11 @@ class MainSlider extends React.Component {
 						{this.renderDots()}
 					</ul>
 
-					<a 
+					<div 
 						className="toggle-play"
 						onClick={this.toggleAutoplay}>
 							{this.renderPlayStop()}
-					</a>
+					</div>
 				</div>
 			)
 	}

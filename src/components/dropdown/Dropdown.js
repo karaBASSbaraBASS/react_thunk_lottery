@@ -10,12 +10,11 @@ const Dropdown = ({
   type,
   active
 }) => {
-  console.log(name, 'as')
   return (
     <div
       className={[
         status ? 'select__menu-active ' : 'select__menu ',
-        type == 'normal' && ' select__menu-easy'
+        type === 'normal' && ' select__menu-easy'
       ]}
     >
       <div
@@ -24,7 +23,7 @@ const Dropdown = ({
       >
         <span>{name ? name : default_name}</span>
 
-        {active && <img className='select__arrow' src={Arrow} />}
+        {active && <img className='select__arrow' src={Arrow} alt="arrow" />}
       </div>
       <ul
         className={

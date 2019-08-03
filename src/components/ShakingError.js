@@ -8,14 +8,16 @@ class ShakingError extends React.Component {
         }; 
     }
 
-	componentWillReceiveProps() {
+	componentDidUpdate() {
     // update key to remount the component to rerun the animation
-  	    this.setState({ key: ++this.state.key });
+        let stateIncrement = this.state.key;
+        stateIncrement += 1;
+  	    this.setState({ key: stateIncrement });
     }
   
     render() {
         return (
-            <div key={this.state.key} className="bounce">
+            <div key={this.state.key} className="errorMessage bounce">
                 {this.props.text}
             </div>
         );

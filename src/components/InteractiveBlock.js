@@ -1,5 +1,7 @@
 import React from "react";
+import { connect } from 'react-redux'
 import ShakingError from "./ShakingError";
+import Table from "./Table";
 
 class InteractiveBlock extends React.Component {
     constructor() {
@@ -31,33 +33,10 @@ class InteractiveBlock extends React.Component {
             }
         return JSON.stringify(data, null, 2);
     }
-    createTable = () => {
-        let table = []
-        // Outer loop to create 5 cards
-        for (let i = 0; i < 5; i++) {
-            let children = []
-            //Inner loop to create 20 checkboxes in each card
-            for (let j = 0; j < 20; j++) {
-                children.push(
-                    <label className="lottery__item" for={j + 1}>
-                        <input type="checkbox" id="horns" name={j + 1}></input>
-                        <span className="lottery__cellNumber">{`${j + 1}`}</span>
-                    </label>
-                )
-            }
-            //Create the card and add the checkboxes
-            table.push(
-                <div className="lottery__card">
-                    <span className="lottery__cardNumber">{i+1}</span>
-                    {children}
-                </div>
-            )
-        }
-        return table
-    }
     
     render(){
-        const { res, invalid, displayErrors } = this.state;
+        const { res, invalid } = this.state;
+        const { cardCountError } = this.props;
         return (
             <section className="lottery">
                 <div className="container maxWidth">
@@ -67,21 +46,18 @@ class InteractiveBlock extends React.Component {
                         <h1>Win the lottery and buy a new one!</h1>
                     </div>
                     <form className="lottery__form" onSubmit={this.handleSubmit}>
-                        {/* Generate tablr of */}
-                        <div className="lottery__wrapper">
-                            {this.createTable()}
-                        </div>    
-                        
+                        {/* Generate table */}
+                        <Table/>    
 
                         <button className="lottery__sendBtn">Send data!</button>
                     </form>
-                    <div className="res-block">
-                        {invalid && (
+                    <div className="resultBlock">
+                        {cardCountError && (
                             <ShakingError text="You cannot select more than five numbers in one card." />
                         )}
                         {!invalid && res && (
                             <div>
-                            <h3>Transformed data to be sent:</h3>
+                            
                             <pre>FormData {res}</pre>
                             </div>
                         )}
@@ -92,4 +68,25 @@ class InteractiveBlock extends React.Component {
     }
 }
 
-export default InteractiveBlock;
+const mapStateToProps = (state) => {
+    return {
+        cardCountError: state.cardCountError
+    }
+}
+  
+export default connect(
+    mapStateToProps,
+    null
+  )(InteractiveBlock);
+
+//"is more than 5?" => 
+//divide checkboxes to columns
+//checkbox on click "is more than 5?"
+//after sending create object with request data
+// using "randon" create response data
+// const intersection = array1.filter(element => array2.includes(element));
+
+//function randomIntFromInterval(min,max) // min and max included
+// {
+//     return Math.floor(Math.random()*(max-min+1)+min);
+// }

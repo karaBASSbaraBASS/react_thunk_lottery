@@ -51,3 +51,9 @@ export function sitiesFetchData(sities) {
         }, 3000);
     };
 }
+export function setCardCountError(bool) {
+    return {
+        type: 'CARD_COUNT_ERROR',
+        cardCountError: bool
+    };
+}
