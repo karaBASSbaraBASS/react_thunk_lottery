@@ -5,17 +5,17 @@ export function itemsHasErrored(bool) {
     };
 }
 
-export function itemsIsLoading(bool) {
-    return {
-        type: 'ITEMS_IS_LOADING',
-        isLoading: bool
-    };
-}
-
 export function itemsFetchDataSuccess(items) {
     return {
         type: 'ITEMS_FETCH_DATA_SUCCESS',
         items: items
+    };
+}
+
+export function itemsIsLoading(bool) {
+    return {
+        type: 'ITEMS_IS_LOADING',
+        isLoading: bool
     };
 }
 
@@ -40,7 +40,7 @@ export function itemsFetchData(url) {
                 return response;
             })
             .then((response) => response.json())
-            .then((items2) => dispatch(itemsFetchDataSuccess(items2)))
+            .then((items) => dispatch(itemsFetchDataSuccess(items)))
             .catch(() => dispatch(itemsHasErrored(true)));
     };
 }

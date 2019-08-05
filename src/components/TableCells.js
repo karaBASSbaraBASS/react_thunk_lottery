@@ -11,8 +11,10 @@ class TableCells extends React.Component{
         this.createCells = this.createCells.bind(this);
         this.clickHandler = this.clickHandler.bind(this);
         this.errorCheck = this.errorCheck.bind(this);
+        //this.getClassName = this.getClassName.bind(this);
     }
     errorCheck = () => {
+        console.log("render count")
         if(this.state.checkBoxCounter>5){
             this.props.cardCountErrorAction(true)
         }else{
@@ -29,7 +31,7 @@ class TableCells extends React.Component{
     }
     
     
-    createCells = (item) => {
+    createCells = (item,recivedCard) => {
         let children = []
         //Inner loop to create 20 checkboxes in each card
         for (let j = 0; j < 20; j++) {
@@ -43,23 +45,51 @@ class TableCells extends React.Component{
         return children;
             
     }
+    // getClassName = (item,j,recivedCard)=>{
+    //     if(recivedCard.length > 0){
+    //         let compared = recivedCard.filter((element)=>{
+    //             console.log(element === item+j+1)
+    //             return element === item+j+1
+    //         })
+    //         //console.log(compared)
+    //         return "lottery__item returnedItem"
+    //         //item+j+1 ? :
+    //     } else {
+    //         return "lottery__item"
+            
+    //     }
+        
+    // }
+    componentDidMount(prevProps, prevState, snapshot){
+        
+    }
     componentDidUpdate(prevProps, prevState, snapshot){
-        this.errorCheck()
+        if (prevState.checkBoxCounter !== this.state.checkBoxCounter){
+            this.errorCheck()
+        }
+        
     }
 
     render() {
-        const { item, i } = this.props;
+        const { item, i, recivedCard } = this.props;
         const { checkBoxCounter } = this.state;
         return (
             <div className={ checkBoxCounter>5 ?'lottery__card error':'lottery__card'} key={item}>
                 <span className="lottery__cardNumber">{i+1}</span>
                 {/*inner loop to create 20 checkboxes*/}
-                {this.createCells(item)}
+                {this.createCells(item,recivedCard)}
             </div>
         )
     }
 }
-  
+const mapStateToProps = (state) => {
+    return {
+        cardCountError: state.cardCountError,
+        lotteryIsLoading: state.lotteryIsLoading,
+        lotteryHasErrored: state.lotteryHasErrored,
+        recivedCard: state.recivedCard
+    }
+} 
 const mapDispatchToProps = dispatch => {
     return {
         cardCountErrorAction: (bool) => dispatch(setCardCountError(bool))
@@ -67,6 +97,6 @@ const mapDispatchToProps = dispatch => {
 }
 
 export default connect(
-    null,
+    mapStateToProps,
     mapDispatchToProps
   )(TableCells)

@@ -11,7 +11,6 @@ class Table extends React.Component{
     }
 
     render() {
-        
         return (
             <div className={ this.props.cardCountError?'lottery__wrapper error':'lottery__wrapper'}>
                 {/*Outer loop to create 5 cards*/}

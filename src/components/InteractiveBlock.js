@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from 'react-redux'
 import ShakingError from "./ShakingError";
 import Table from "./Table";
+import { lotteryFetchData } from "../actions/lottery";
 
 class InteractiveBlock extends React.Component {
     constructor() {
@@ -9,34 +10,33 @@ class InteractiveBlock extends React.Component {
         this.state = {};
         this.handleSubmit = this.handleSubmit.bind(this);
     }
+    
     handleSubmit(event) {
         event.preventDefault();
-        if (!event.target.checkValidity()) {
-            this.setState({
-                invalid: true,
-                displayErrors: true,
-            });
-            return;
-        }
+
         const form = event.target;
         const data = new FormData(form);
+        const result = this.getCheckedNames(data);
+        const selectedNames = Object.keys(result);
+        this.props.checkLotteryCard(selectedNames);
+
         this.setState({
-            res: this.stringifyFormData(data),
+            formData: JSON.stringify(selectedNames),
             invalid: false,
             displayErrors: false,
         });
     }
-    stringifyFormData(fd) {
+    getCheckedNames(fd) {
         const data = {};
             for (let key of fd.keys()) {
                 data[key] = fd.get(key);
             }
-        return JSON.stringify(data, null, 2);
+        return data;
     }
     
     render(){
-        const { res, invalid } = this.state;
-        const { cardCountError } = this.props;
+        const { formData, invalid } = this.state;
+        const { cardCountError, lotteryIsLoading, lotteryHasErrored, generatedNumbers, guessedNumbers } = this.props;
         return (
             <section className="lottery">
                 <div className="container maxWidth">
@@ -47,19 +47,26 @@ class InteractiveBlock extends React.Component {
                     </div>
                     <form className="lottery__form" onSubmit={this.handleSubmit}>
                         {/* Generate table */}
-                        <Table/>    
+                        <Table />    
 
-                        <button className="lottery__sendBtn">Send data!</button>
+                        <button className={lotteryIsLoading ? "disabled lottery__sendBtn": "lottery__sendBtn" } disabled={cardCountError}>
+                            {lotteryIsLoading? 
+                                <div className="loader"></div> :
+                                "Send data!"
+                            }
+                        </button>
                     </form>
                     <div className="resultBlock">
                         {cardCountError && (
                             <ShakingError text="You cannot select more than five numbers in one card." />
                         )}
-                        {!invalid && res && (
+                        {!lotteryHasErrored && generatedNumbers.length>0 &&(
                             <div>
-                            
-                            <pre>FormData {res}</pre>
+                                <div>generated: {JSON.stringify(generatedNumbers)}</div>
+                                <div>guessed: {JSON.stringify(guessedNumbers)}</div>
+                                <Table generatedNumbers guessedNumbers/>
                             </div>
+                            
                         )}
                     </div>
                 </div>
@@ -70,23 +77,20 @@ class InteractiveBlock extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        cardCountError: state.cardCountError
+        cardCountError: state.cardCountError,
+        lotteryIsLoading: state.lotteryIsLoading,
+        lotteryHasErrored: state.lotteryHasErrored,
+        generatedNumbers: state.generatedNumbers,
+        guessedNumbers: state.guessedNumbers,
+    }
+}
+const mapDispatchToProps = dispatch => {
+    return {
+        checkLotteryCard: (selectedNames) => dispatch(lotteryFetchData(selectedNames))
     }
 }
   
 export default connect(
     mapStateToProps,
-    null
+    mapDispatchToProps
   )(InteractiveBlock);
-
-//"is more than 5?" => 
-//divide checkboxes to columns
-//checkbox on click "is more than 5?"
-//after sending create object with request data
-// using "randon" create response data
-// const intersection = array1.filter(element => array2.includes(element));
-
-//function randomIntFromInterval(min,max) // min and max included
-// {
-//     return Math.floor(Math.random()*(max-min+1)+min);
-// }

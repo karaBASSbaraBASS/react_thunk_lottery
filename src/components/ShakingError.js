@@ -8,7 +8,7 @@ class ShakingError extends React.Component {
         }; 
     }
 
-	componentDidUpdate() {
+	componentDidUpdate(prevProps, prevState, snapshot){
     // update key to remount the component to rerun the animation
         let stateIncrement = this.state.key;
         stateIncrement += 1;
