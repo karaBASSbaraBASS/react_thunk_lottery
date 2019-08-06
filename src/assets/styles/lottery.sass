@@ -69,6 +69,13 @@
         input
             &[type=checkbox] + span
                 background-color: #ffd100;
+    .guessedItem
+        input
+            &[type=checkbox] + span
+                animation: gradientBG 3s ease infinite;
+                background: linear-gradient(-45deg,#F17C58,#E94584,#24AADB,#27DBB1,#FFDC18,#FF3706);
+                background-size: 400% 400%;
+                
     &__cardNumber
         position: absolute;
         top: 50%;
@@ -108,6 +115,14 @@
         &.disabled
             background-color: $primaryColor !important;
             padding: 0;
+
+@keyframes gradientBG
+    0%
+        background-position: 0% 50%;
+    50%
+        background-position: 100% 50%; 
+    100%
+        background-position: 0% 50%;
 
 .row
     display: flex

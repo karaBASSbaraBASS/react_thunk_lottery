@@ -62,9 +62,7 @@ class InteractiveBlock extends React.Component {
                         )}
                         {!lotteryHasErrored && generatedNumbers.length>0 &&(
                             <div>
-                                <div>generated: {JSON.stringify(generatedNumbers)}</div>
-                                <div>guessed: {JSON.stringify(guessedNumbers)}</div>
-                                <Table generatedNumbers guessedNumbers/>
+                                <h3>You guessed {JSON.stringify(guessedNumbers.length)} out of 25 numbers, want to try again?</h3>
                             </div>
                             
                         )}

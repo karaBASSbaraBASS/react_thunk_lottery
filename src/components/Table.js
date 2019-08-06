@@ -25,7 +25,11 @@ class Table extends React.Component{
 }
 const mapStateToProps = (state) => {
     return {
-        cardCountError: state.cardCountError
+        cardCountError: state.cardCountError,
+        lotteryIsLoading: state.lotteryIsLoading,
+        lotteryHasErrored: state.lotteryHasErrored,
+        generatedNumbers: state.generatedNumbers,
+        guessedNumbers: state.guessedNumbers,
     }
 }
   

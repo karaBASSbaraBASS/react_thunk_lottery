@@ -11,6 +11,7 @@ class TableCells extends React.Component{
         this.createCells = this.createCells.bind(this);
         this.clickHandler = this.clickHandler.bind(this);
         this.errorCheck = this.errorCheck.bind(this);
+        this.amIChecked = this.amIChecked.bind(this);
         //this.getClassName = this.getClassName.bind(this);
     }
     errorCheck = () => {
@@ -31,19 +32,42 @@ class TableCells extends React.Component{
     }
     
     
-    createCells = (item,recivedCard) => {
+    createCells = (item,generatedNumbers) => {
         let children = []
         //Inner loop to create 20 checkboxes in each card
         for (let j = 0; j < 20; j++) {
             children.push(
-                <label className="lottery__item" onClick={this.clickHandler} htmlFor={item+j+1} key={item+j+1} >
+                <label className={this.amIChecked(item, j, generatedNumbers)} onClick={this.clickHandler} htmlFor={item+j+1} key={item+j+1} >
                     <input type="checkbox" id="horns" name={item+j+1}></input>
                     <span className="lottery__cellNumber">{`${j + 1}`}</span>
                 </label>
             )
         }
-        return children;
+        return children;     
+    }
+    amIChecked = (item,j, generatedNumbers) => { 
+        
+        if(generatedNumbers.length>0){
+            let name = item+j+1
+            let filter = generatedNumbers.find((element, index, array)=>{
+                return String(name) === element
+            })
+            //if(generatedNumbers.indexOf( `"${item+j+1}"` ) != -1){
+                console.log(filter)
+                if(filter){
+                    console.log("lottery__item returnedItem")
+                    return "lottery__item returnedItem"
+                } else{
+                    console.log("lottery__item")
+                    return "lottery__item"
+                }
+
+            // })
             
+        }else{
+            return "lottery__item"
+        }
+        
     }
     // getClassName = (item,j,recivedCard)=>{
     //     if(recivedCard.length > 0){
@@ -61,7 +85,7 @@ class TableCells extends React.Component{
         
     // }
     componentDidMount(prevProps, prevState, snapshot){
-        
+        //this.amIChecked(100, 7, ["103","109","111","111","119","202"])
     }
     componentDidUpdate(prevProps, prevState, snapshot){
         if (prevState.checkBoxCounter !== this.state.checkBoxCounter){
@@ -71,13 +95,13 @@ class TableCells extends React.Component{
     }
 
     render() {
-        const { item, i, recivedCard } = this.props;
+        const { item, i, generatedNumbers } = this.props;
         const { checkBoxCounter } = this.state;
         return (
             <div className={ checkBoxCounter>5 ?'lottery__card error':'lottery__card'} key={item}>
                 <span className="lottery__cardNumber">{i+1}</span>
                 {/*inner loop to create 20 checkboxes*/}
-                {this.createCells(item,recivedCard)}
+                {this.createCells(item,generatedNumbers)}
             </div>
         )
     }
@@ -87,7 +111,8 @@ const mapStateToProps = (state) => {
         cardCountError: state.cardCountError,
         lotteryIsLoading: state.lotteryIsLoading,
         lotteryHasErrored: state.lotteryHasErrored,
-        recivedCard: state.recivedCard
+        generatedNumbers: state.generatedNumbers,
+        guessedNumbers: state.guessedNumbers,
     }
 } 
 const mapDispatchToProps = dispatch => {
