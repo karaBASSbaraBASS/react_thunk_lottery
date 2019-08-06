@@ -3,12 +3,15 @@ import { connect } from 'react-redux'
 import ShakingError from "./ShakingError";
 import Table from "./Table";
 import { lotteryFetchData } from "../actions/lottery";
+import { lotteryWipeData } from "../actions/lottery";
 
 class InteractiveBlock extends React.Component {
     constructor() {
         super();
         this.state = {};
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.lotteryWipeData = this.handleSubmit.bind(this);
+        this.handleReset = this.handleReset.bind(this);
     }
     
     handleSubmit(event) {
@@ -25,6 +28,10 @@ class InteractiveBlock extends React.Component {
             invalid: false,
             displayErrors: false,
         });
+    }
+    handleReset(event){
+        event.preventDefault();
+        this.props.lotteryWipeDataAction();
     }
     getCheckedNames(fd) {
         const data = {};
@@ -48,13 +55,19 @@ class InteractiveBlock extends React.Component {
                     <form className="lottery__form" onSubmit={this.handleSubmit}>
                         {/* Generate table */}
                         <Table />    
-
-                        <button className={lotteryIsLoading ? "disabled lottery__sendBtn": "lottery__sendBtn" } disabled={cardCountError}>
+                        {(!generatedNumbers.length>0) ?
+                            <button key="1" type="submit" className={lotteryIsLoading ? "disabled lottery__sendBtn": "lottery__sendBtn" } disabled={cardCountError}>
                             {lotteryIsLoading? 
                                 <div className="loader"></div> :
                                 "Send data!"
                             }
-                        </button>
+                            </button>
+                            :
+                            <button key="2" type="button" className="lottery__sendBtn" onClick={this.handleReset}>
+                                Reset
+                            </button>
+                        }
+                        
                     </form>
                     <div className="resultBlock">
                         {cardCountError && (
@@ -62,9 +75,8 @@ class InteractiveBlock extends React.Component {
                         )}
                         {!lotteryHasErrored && generatedNumbers.length>0 &&(
                             <div>
-                                <h3>You guessed {JSON.stringify(guessedNumbers.length)} out of 25 numbers, want to try again?</h3>
+                                <h3>You guessed {JSON.stringify(guessedNumbers.length)} out of 25 numbers, want to try again? Than press "RESET"!</h3>
                             </div>
-                            
                         )}
                     </div>
                 </div>
@@ -84,7 +96,8 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = dispatch => {
     return {
-        checkLotteryCard: (selectedNames) => dispatch(lotteryFetchData(selectedNames))
+        checkLotteryCard: (selectedNames) => dispatch(lotteryFetchData(selectedNames)),
+        lotteryWipeDataAction: () => dispatch(lotteryWipeData()),
     }
 }
   

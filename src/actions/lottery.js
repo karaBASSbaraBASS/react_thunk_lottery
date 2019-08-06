@@ -32,6 +32,12 @@ export function lotteryIsLoading(bool) {
         lotteryisLoading: bool
     };
 }
+export function lotteryWipeData() {
+    return (dispatch) => {
+        dispatch(lotteryFetchDataSuccess([]))
+        dispatch(lotteryFetchCalcGuessed([]))
+    }
+}
 
 export function lotteryFetchData(selectedNames) {
     return (dispatch) => {

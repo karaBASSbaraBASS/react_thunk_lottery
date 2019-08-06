@@ -32,12 +32,12 @@ class TableCells extends React.Component{
     }
     
     
-    createCells = (item,generatedNumbers) => {
+    createCells = (item,generatedNumbers,guessedNumbers) => {
         let children = []
         //Inner loop to create 20 checkboxes in each card
         for (let j = 0; j < 20; j++) {
             children.push(
-                <label className={this.amIChecked(item, j, generatedNumbers)} onClick={this.clickHandler} htmlFor={item+j+1} key={item+j+1} >
+                <label className={this.amIChecked(item, j, generatedNumbers, guessedNumbers)} onClick={this.clickHandler} htmlFor={item+j+1} key={item+j+1} >
                     <input type="checkbox" id="horns" name={item+j+1}></input>
                     <span className="lottery__cellNumber">{`${j + 1}`}</span>
                 </label>
@@ -45,24 +45,27 @@ class TableCells extends React.Component{
         }
         return children;     
     }
-    amIChecked = (item,j, generatedNumbers) => { 
+    amIChecked = (item,j,generatedNumbers,guessedNumbers) => { 
         
         if(generatedNumbers.length>0){
             let name = item+j+1
-            let filter = generatedNumbers.find((element, index, array)=>{
+            let filterGenerated = generatedNumbers.find((element, index, array)=>{
                 return String(name) === element
             })
-            //if(generatedNumbers.indexOf( `"${item+j+1}"` ) != -1){
-                console.log(filter)
-                if(filter){
-                    console.log("lottery__item returnedItem")
+            let filterGuessed = guessedNumbers.find((element, index, array)=>{
+                return String(name) === element
+            })
+            console.log(filterGenerated)
+            if(filterGenerated){
+                if(filterGuessed){
+                    return "lottery__item guessedItem"
+                } else {
                     return "lottery__item returnedItem"
-                } else{
-                    console.log("lottery__item")
-                    return "lottery__item"
                 }
-
-            // })
+            } else{
+                return "lottery__item"
+            }
+            
             
         }else{
             return "lottery__item"
@@ -95,13 +98,13 @@ class TableCells extends React.Component{
     }
 
     render() {
-        const { item, i, generatedNumbers } = this.props;
+        const { item, i, generatedNumbers, guessedNumbers } = this.props;
         const { checkBoxCounter } = this.state;
         return (
             <div className={ checkBoxCounter>5 ?'lottery__card error':'lottery__card'} key={item}>
                 <span className="lottery__cardNumber">{i+1}</span>
                 {/*inner loop to create 20 checkboxes*/}
-                {this.createCells(item,generatedNumbers)}
+                {this.createCells(item,generatedNumbers, guessedNumbers)}
             </div>
         )
     }
